@@ -1,0 +1,29 @@
+1.(10 pts) In the function main on line 47, a mov instruction copies the frame pointer address into r0.
+
+	a.What is that the address of? (Hint: Look at the C code)
+	- the beginning of the point structure called "dot"
+	b.What is it used for afterwards in init and main?
+	- it's used as a base addr to access/modify 
+	the elements of the point structure
+
+
+2.(10 pts) Which two lines in the C program (put the full line of code, not line numbers) correspond to the following two lines of function init in the assembly version?
+
+	str r1, [fp]
+	- local.x = x_arg;
+	str r2, [fp, #4]
+	- local.y = y_arg;
+
+3.(10 pts) In the function zero, what value(s) does the program store at addresses [fp] and [fp, #4] (Lines 27 and 28)?
+	- 0 in both (this makes sense because the function initializes both
+	variables to 0)
+
+4.(10 pts) Which two lines in the C program (put the full line of code, not line numbers) correspond to the following two lines of function zero in the assembly version?
+
+	str r3, [fp]
+	- local.x = 0;
+	str r3, [fp, #4]
+	- local.y = 0;
+
+5.(10 pts) Based on the ARM code (not the C code), in the function zero, what does it return? Remember, there is no specific return <variable> command in ARM. The return value is always whatever is stored in the register designated to hold the return value (you should know which one this is). Don't answer the question with the register name, actually describe what the value is and what it represents.
+	- it "returns" 0 and 0, which represent the values of the x and y variables

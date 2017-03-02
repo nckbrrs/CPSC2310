@@ -1,0 +1,56 @@
+1. (20 pts) Fill in the table below for every call to "fact". Each row
+represents the values of r1 and lr when line 3 executes and they are pushed
+onto the stack. The first time it executes, r1 is unset and the lr points to line 39.
+
+r1	lr
+---	-------
+-	39
+10	12
+9  12
+8  12
+7  12
+6  12
+5  12
+4  12
+3  12
+2  12
+
+
+2. (15 pts) In "fac.s", the multiply instruction on line 12 comes after a "bl" which is a branch that will always be taken. How does line 12 get executed if the "bl" is always taken?
+
+HINT: Review what "bl" does at http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0489c/Cihfddaf.html (scroll down to "Operations")
+
+	when r0 = 1 at the last call to fact, it branches to the "done" label, where
+	the values on the stack are popped off into r1 and the pc. since the stack
+	is currently full of r1 values and the LRs from previous calls to "fact" 
+	(all of which, except the first, will be line 12), the r1 values will be placed 
+	into r1 and the LR values will be placed into the pc. so when a 12 from the stack 
+	is put into the PC, the program will execute line 12 
+	
+
+
+3. (10 pts) Why doesn't the code in "fac2.s" save any registers on the stack? What is it doing instead?
+	
+	it places 10 in r0 and 1 in r1, then goes to "here" which multiplies r1 by r0
+	and decrements r0 continually while r0 is not 0. 
+	when r0 is finally 0, it branches to "there", which moves the final result 
+	of "here" (which will be in r1) into r0, and then branches back to main 
+	where r0 will be printed.
+
+	(i.e. it decrements a counter in one register starting at 10 and 
+	multiplies the counter by the current factorial in another register until 
+	the counter reaches 0).
+
+
+4. (5 pts) Identify which program calculates the factorial recursively and which is iterative.
+	fac.s is recursive and fac2.s is iterative
+
+
+
+
+5. (50 pts) Comment each line in "fac.s" and "fac2.s" that has the comment symbol (@) at the end of it.
+	done
+
+NOTE: The comments for "main:" in "fac.s" are already done for you and you do not have to comment "main:" in "fac2.s".
+
+

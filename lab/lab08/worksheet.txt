@@ -1,0 +1,28 @@
+1.  ------
+    | 40 |
+    ------
+    | 36 |
+    ------
+    | 32 |
+    ------
+    | 28 |
+    ------
+    | 24 |
+    ------
+    | 20 |
+    ------
+    | 16 |
+    ------
+    | 12 |
+    ------
+    | 8  |
+    ------
+    | 4  |
+    ------
+    | sp |
+    ------
+
+2.
+	it adds the r3, which is the counter variable that is incremented
+	by 4 (the size in bytes of an int) in each iteration, as an offset to the 
+	current stack pointer

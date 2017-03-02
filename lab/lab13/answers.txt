@@ -1,0 +1,26 @@
+Nicholas Barrs
+
+2) n is 1000
+
+3) ijk.c performs matrix multiplication in the same manner as in the doc
+
+4) program | loads | stores
+   --------+-------+-------
+    ijk.c  |  2    | 0
+    jki.c  |  2    | 1
+    kij.c  |  2    | 1
+
+5) kij.c has the best spatial locality because it accesses all of the
+   elements in each row, row by row, which is how C stores array elements,
+   so they will be close together in memory.
+
+   jki.c has the worst spatial locality because it accesses all of the
+   elements in a column, column by column, which is the opposite of the way
+   that C stores array elements so they won't be close together in memory.
+
+6) ijk runs in 0.88 seconds
+   jki runs in 2.20 seconds
+   kij runs in 0.55 seconds
+
+7) spatial locality matters more, because despite kij performing more
+   loads and stores than the other two, it is still the fastest

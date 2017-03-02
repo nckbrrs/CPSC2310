@@ -1,0 +1,79 @@
+1. What is the address (in hexadecimal) of the first and last instruction in the loop?
+	first instruction: 0x00008d1c
+	last instruction: 0x00008d48	
+	
+
+2. Is the loop of the "while(condition)-do", "repeat-until(condition)", or "do-while(condition)" form?
+	do-while
+
+
+3. Do the values of 'x' increase or decrease?
+	increase
+
+
+4. In the form of "b *ADDRESS", what is the command to set a breakpoint on the line where you can observe the new value of 'y' after it is calcualted? Actually use "print $r0" to check and make sure the register you think is 'y' has been updated and has the correct value.
+	b 32
+
+
+5. What two gdb commands can you enter so that at each and every step, gdb will print both the decimal and hexadecimal form of the value 'y'?
+	display /d $r3
+	display /x $r3
+
+
+6. The loop as written only calculates the value of 'y' for the values of 'x' between 0 and 9. It should calculate the value of 'y' for all values of 'x' between 0 and 10. Why does the loop stop at 9 and what change would fix it?
+	currently, the program keeps looping while x-10 < 0, so when x = 10 it would
+	exit the loop. to fix this, change the blt command at the end of the loop to
+	"ble". this way, it keeps looping while x-10 <= 0, so it would run one more
+	time when x=10.
+
+
+7. Correct the code in "loop.s", assemble and step through the program again in gdb. Fill in the following table:
+
+register        register                register
+   x               y                       y
+(counter)       (decimal)               (hexadecimal)
+
+   0            ___7_              _0x7_
+
+   1            __-1_              _0xffffffff_
+
+   2            __-9_              _0xfffffff7_
+
+   3            _-17_              _0xffffffef_
+
+   4            _-25_              _0xffffffe7_
+
+   5            _-33_              _0xffffffdf_
+
+   6            _-41_              _0xffffffd7_
+
+   7            _-49_              _0xffffffcf_
+
+   8            _-57_              _0xffffffc7_
+
+   9            _-65_              _0xffffffbf_
+
+  10            _-73_              _0xffffffb7_
+  
+
+=====================
+ Octal Dump Questions
+=====================
+
+8. What type of data is in the source file?
+ARM assembly language; human readable
+
+
+9. What type of data is in the executable?
+ARM executable; computer readable
+
+
+BONUS:
+
+10. Use the directory list command (ls -l) to determine the size of your source file (loop.s) and the executable (loop). How do the files compare in size? Which is bigger? In order to get any credit you must also explain why it is bigger.
+	source file: 1008 bits
+	executable file: 577 KB
+	the executable file is so much bigger because, while the source file is
+	simply code/text, the executable file has been linked with libraries and
+	all other data needed for the computer to run the program 
+	 

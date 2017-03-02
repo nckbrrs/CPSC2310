@@ -1,0 +1,66 @@
+CP SC 3621 Lab 1
+
+1. Run "./acc_x86". Explain what the simulator is doing in the fetch, decode, 
+execute cycle. (10 points)
+	in the fetch cycle, PC is sent to the MAR. the memory returns the data stored
+		at the address indicated by the PC. the CPU copies that data into the MDR,
+		and from the MDR into the IR. the PC is incremented so that it points to
+		the next instruction's address from memory. 
+	in the decode cycle, the decoder	interprets from the IR what instruction
+		should be performed.
+	in the execute cycle, the control unit of the CPU passes the decoded
+		information as a sequence of control signals to the function units of the
+		CPU to perform the actual actions of the instruction.
+
+2. You should be using one of the branching instructions in your my_loop.m 
+source code (ex: ble0, bgt0, etc.). At which position in memory (i.e. program 
+counter value) is your branch instruction? (10 points)
+	my branch instruction is at position 29
+
+
+3. Explain the difference between MDR and MAR. (10 points)
+	MDR is a hardware register where data to be transferred to/from memory are
+		temporarily stored.
+	MAR is a hardware register used to keep the address of a memory location in
+		which data are to be written or read.
+	So the MDR acts like a cache storing data that is swapped in and out of
+		memory, while the MAR keeps a record of the place where the data
+		is stored.
+
+4. Run the three versions of the program using acc and record the statistics. 
+(10 points)
+	source1.m:
+		simulation of accumulator machine ends with acc = 0
+			instructions executed = 98
+			instruction fetches = 195
+			data reads = 54
+			data writes = 22
+
+
+	source2.m:
+		simulation of accumulator machine ends with acc = 0
+			instructions executed = 76
+			instruction fetches = 151
+			data reads = 43
+			data writes = 22
+
+
+	my_loop.m:
+		simulation of accumulator machine ends with acc = 1
+			instructions executed = 92	
+			instruction fetches = 183
+			data reads = 61
+			data writes = 20
+
+5. Explain the differences in statistics. (15 points)
+	source2.m has executes less instructions and less fetches because it only 
+		has one branch at the bottom, whereas source1.m has two branches. 
+		my_loop.m executes less instructions and fetches than source1.m, but 
+		more than source2.m 
+
+6. Which version do you think is better and why? (15 points)
+	I'd say source2.m is the best becuase it executes the least amount of 
+		instructions and fetches and reads/writes 
+
+7. Fill in the blanks in worksheet_b.txt. (30 points)
+

@@ -1,0 +1,70 @@
+#!/usr/bin/perl
+
+use warnings;
+use strict;
+
+my @x_data_raw = split(' ', <STDIN>);
+my @x_data;
+shift(@x_data_raw);
+shift(@x_data_raw);
+while (scalar(@x_data_raw)) {
+  push(@x_data, shift(@x_data_raw));
+  $x_data[$#x_data] .= shift(@x_data_raw);
+}
+# print "x data:\n";
+# foreach my $x_value (@x_data) {
+#   print "  $x_value\n";
+# }
+
+my @y_data;
+my @z_data;
+while (my $line = <STDIN>) {
+  my @data_raw = split(' ', $line);
+  push(@y_data, shift(@data_raw));
+  push(@z_data, [@data_raw]);
+  if (scalar(@x_data) != scalar(@{$z_data[$#z_data]})) {
+    die("Size of x data is wrong.\n");
+  }
+}
+# print "y data:\n";
+# foreach my $y_value (@y_data) {
+#   print "  $y_value\n";
+# }
+if (scalar(@y_data) != scalar(@z_data)) {
+  die("Size of y data is wrong.\n");
+}
+
+print "set pm3d\n";
+print "set palette rgbformulae 23,28,3\n";
+print "set hidden3d\n";
+print "set key off\n";
+
+print "set xlabel 'Working Set (bytes)'\n";
+print "set xtics (";
+for (my $xi = 0; $xi < scalar(@x_data); ++$xi) {
+  if ($xi != 0) {
+    print ", ";
+  }
+  print "\"$x_data[$xi]\" $xi";
+}
+print ")\n";
+
+print "set ylabel 'Stride (doublewords)'\n";
+print "set ytics (";
+for (my $yi = 0; $yi < scalar(@y_data); ++$yi) {
+  if ($yi != 0) {
+    print ", ";
+  }
+  print "\"$y_data[$yi]\" $yi";
+}
+print ")\n";
+
+print "set zlabel 'Transfer Bandwidth (MB/s)'\n";
+print "splot '-' matrix with lines\n";
+for (my $yi = 0; $yi < scalar(@y_data); ++$yi) {
+  for (my $xi = 0; $xi < scalar(@x_data); ++$xi) {
+    print "$z_data[$yi]->[$xi] ";
+  }
+  print "\n";
+}
+print "e\n";
